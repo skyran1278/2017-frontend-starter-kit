@@ -1,0 +1,99 @@
+// 引入欲使用的套件模組
+import gulp from 'gulp';
+import sass from 'gulp-sass';
+import uglify from 'gulp-uglify';
+import connect from 'gulp-connect';
+import browserify from 'browserify';
+import babelify from 'babelify';
+// 轉成 gulp 讀取的 vinyl（黑膠）流
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import sourcemaps from 'gulp-sourcemaps';
+import gutil from 'gulp-util';
+import image from 'gulp-image';
+
+
+const dirs = {
+  src: 'src',
+  dest: 'dist'
+};
+
+const stylesPaths = {
+  src: `${dirs.src}/styles/*.scss`,
+  dest: `${dirs.dest}/css`
+};
+
+const htmlPaths = {
+  src: `${dirs.src}/*.html`,
+  dest: `${dirs.dest}`
+};
+
+const scriptsPaths = {
+  src: `${dirs.src}/scripts/*.js`,
+  dest: `${dirs.dest}/js`
+};
+
+const imagesPaths = {
+  src: `${dirs.src}/images/*`,
+  dest: `${dirs.dest}/img`
+};
+
+// 編譯 Scss 任務，完成後送到 dist/css/main.css
+gulp.task('styles', () => {
+  gulp.src(stylesPaths.src)
+    .pipe(sass().on('error', sass.logError))         // 編譯 Scss
+    .pipe(gulp.dest(stylesPaths.dest))  
+    .pipe(connect.reload());
+});
+
+// 編譯 JavaScript 轉譯、合併、壓縮任務，完成後送到 dist/js/bundle.js
+gulp.task('scripts', () => {
+    browserify({
+        entries: ['./src/scripts/main.js']
+    })
+    .transform(babelify) // 轉譯
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(buffer()) // 從 streaming 轉回 buffered vinyl 檔案
+    .pipe(sourcemaps.init({loadMaps: true})) // 由於我們壓縮了檔案，要用 sourcemaps 來對應原始文件方便除錯
+    	.pipe(uglify()) // 壓縮檔案
+    	.on('error', gutil.log)
+    .pipe(sourcemaps.write('./')) 
+    .pipe(gulp.dest(scriptsPaths.dest))
+    .pipe(connect.reload());
+});
+
+// 複製 images 任務，完成後送到 dist/images
+gulp.task('images', () => {
+  gulp.src(imagesPaths.src)
+    .pipe(image())
+    .pipe(gulp.dest(imagesPaths.dest))
+    .pipe(connect.reload());
+});
+
+// 複製 html 任務，完成後送到 dist
+gulp.task('copy-html', () => {
+  gulp.src(htmlPaths.src)
+	.pipe(gulp.dest(htmlPaths.dest))
+	.pipe(connect.reload());
+});
+// 啟動測試用 server
+gulp.task('server', () => {
+  connect.server({
+    root: ['./dist'],
+    livereload: true,
+    port: 7777,
+  });
+});
+
+// 監聽是否有檔案更新
+gulp.task('watch', () => {
+  gulp.watch(stylesPaths.src, ['styles']);
+  gulp.watch(scriptsPaths.src, ['scripts']);
+  gulp.watch(imagesPaths.src, ['images']);
+  gulp.watch(htmlPaths.src, ['copy-html']);
+});
+
+// 兩種任務類型，第一種會啟動 server
+gulp.task('default', ['copy-html', 'scripts', 'styles', 'images', 'server', 'watch']);
+gulp.task('build', ['copy-html', 'scripts', 'styles', 'images']);

@@ -1,0 +1,20 @@
+{
+  "name": "2017-0101-frontend-starter-kit",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "skyran"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

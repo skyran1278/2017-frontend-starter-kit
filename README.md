@@ -5,7 +5,7 @@ NodeJS/NPM/ES6/Bower/Gulp/Sass/Babel/Babelify/Browserify
 ## Usage
 
 ```
-安裝 GitHub NodeJS
+Install GitHub NodeJS
 ```
 
 ```

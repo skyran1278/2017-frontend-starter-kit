@@ -5,11 +5,15 @@ NodeJS/NPM/ES6/Bower/Gulp/Sass/Babel/Babelify/Browserify
 ## Usage
 
 ```
-$ git clone
+安裝 GitHub NodeJS
 ```
 
 ```
-$ cd
+$ git clone https://github.com/skyran1278/2017-frontend-starter-kit.git
+```
+
+```
+$ cd 2017-frontend-starter-kit
 ```
 
 ```
@@ -20,7 +24,9 @@ $ npm install && bower install
 $ npm start
 ```
 
-Check the browser `localhost:7777`
+```
+localhost:7777
+```
 
 ## License
 MIT

@@ -1,5 +1,5 @@
 {
-  "name": "2017-0101-frontend-starter-kit",
+  "name": "2017-frontend-starter-kit",
   "description": "",
   "main": "index.js",
   "authors": [
@@ -10,9 +10,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "bootstrap": "^3.3.7"

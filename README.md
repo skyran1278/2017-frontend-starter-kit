@@ -13,10 +13,6 @@ $ git clone https://github.com/skyran1278/2017-frontend-starter-kit.git
 ```
 
 ```
-$ cd 2017-frontend-starter-kit
-```
-
-```
 $ npm install && bower install
 ```
 

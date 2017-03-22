@@ -17,13 +17,19 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.4",
     "gulp-connect": "^5.0.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-image": "^2.7.2",
     "gulp-sass": "^3.0.0",
     "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.8",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "del": "^2.2.2"
+  },
+  "dependencies": {
+    
   }
 }

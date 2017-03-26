@@ -11,7 +11,7 @@ import buffer from 'vinyl-buffer';
 import sourcemaps from 'gulp-sourcemaps';
 import gutil from 'gulp-util';
 import image from 'gulp-image';
-import htmlmin from 'gulp-htmlmin';
+//import htmlmin from 'gulp-htmlmin'; 常出現錯誤
 import cleanCSS from 'gulp-clean-css';
 import del from 'del';
 
@@ -105,7 +105,7 @@ gulp.task('images', ['cleanImages'], () => {
 // 複製 html 任務，完成後送到 dist
 gulp.task('html', ['cleanHtml'], () => {
   return gulp.src(htmlPaths.src)
-     .pipe(htmlmin({collapseWhitespace: true})) 
+     //.pipe(htmlmin({collapseWhitespace: true})) 
      .pipe(gulp.dest(htmlPaths.dest))
      .pipe(connect.reload());
 });
